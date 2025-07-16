@@ -7,6 +7,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .snow {
+            position: fixed;
+            top: -10px;
+            z-index: 9999;
+            color: white;
+            user-select: none;
+            pointer-events: none;
+        }
+        .left-snow {
+            left: 5%;
+        }
+        .right-snow {
+            right: 5%;
+        }
         .gradient-text {
             background: linear-gradient(90deg, #ffffff 0%, #9ca3af 100%);
             -webkit-background-clip: text;
@@ -39,14 +53,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-xl font-bold gradient-text">Only Fear God ✞</span>
+                    <span class="text-xl font-bold" style="background: linear-gradient(90deg, #9ca3af 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Only Fear God ✞</span>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium">About Me</a>
-                        <a href="#skills" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Skills</a>
-                        <a href="#videos" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Videos</a>
+                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium" style="background: linear-gradient(90deg, #9ca3af 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Home</a>
+                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium" style="background: linear-gradient(90deg, #9ca3af 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">About Me</a>
+                        <a href="#skills" class="nav-link px-3 py-2 rounded-md text-sm font-medium" style="background: linear-gradient(90deg, #9ca3af 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Skills</a>
+                        <a href="#work" class="nav-link px-3 py-2 rounded-md text-sm font-medium" style="background: linear-gradient(90deg, #9ca3af 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">My Work</a>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -62,7 +76,7 @@
                 <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium">About Me</a>
                 <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium">Skills</a>
-                <a href="#videos" class="block px-3 py-2 rounded-md text-base font-medium">Videos</a>
+                <a href="#work" class="block px-3 py-2 rounded-md text-base font-medium">My Work</a>
             </div>
         </div>
     </nav>
@@ -70,17 +84,17 @@
     <!-- Hero Section -->
     <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
         <div class="text-center w-full">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 gradient-text">Brayden Carreon</h1>
+            <h1 class="text-5xl md:text-7xl font-bold mb-4" style="background: linear-gradient(90deg, #9ca3af 0%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Brayden Carreon</h1>
             <div class="flex justify-center space-x-6 mb-8">
-                <span class="text-xl md:text-2xl font-light text-gray-400">Perfection</span>
-                <span class="text-xl md:text-2xl font-light text-gray-400">|</span>
-                <span class="text-xl md:text-2xl font-light text-gray-400">Beazy</span>
+                <span class="text-xl md:text-2xl font-semibold text-gray-400">Perfection</span>
+                <span class="text-xl md:text-2xl font-semibold text-gray-400">|</span>
+                <span class="text-xl md:text-2xl font-semibold text-gray-400">Beazy</span>
             </div>
             <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10">
                 I’m a video editor who specializes in creating funny gaming moments with friends. I focus on fast-paced, engaging edits that highlight humor and personality in every clip.
             </p>
             <div class="flex justify-center space-x-4">
-                <a href="#videos" class="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition duration-300">
+                <a href="#work" class="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition duration-300">
                     View My Work
                 </a>
                 <a href="#contact" class="px-6 py-3 border border-gray-600 text-white rounded-md hover:bg-gray-800 transition duration-300">
@@ -90,6 +104,34 @@
         </div>
     </section>
 
+    <!-- Tab Switching Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoTab = document.getElementById('video-tab');
+            const thumbnailTab = document.getElementById('thumbnail-tab');
+            const videoContent = document.getElementById('video-content');
+            const thumbnailContent = document.getElementById('thumbnail-content');
+
+            videoTab.addEventListener('click', function () {
+                videoContent.classList.remove('hidden');
+                thumbnailContent.classList.add('hidden');
+                this.classList.add('bg-gray-800', 'border-gray-700', 'text-white');
+                this.classList.remove('border-gray-600', 'text-gray-400');
+                thumbnailTab.classList.remove('bg-gray-800', 'border-gray-700', 'text-white');
+                thumbnailTab.classList.add('border-gray-600', 'text-gray-400');
+            });
+
+            thumbnailTab.addEventListener('click', function () {
+                videoContent.classList.add('hidden');
+                thumbnailContent.classList.remove('hidden');
+                this.classList.add('bg-gray-800', 'border-gray-700', 'text-white');
+                this.classList.remove('border-gray-600', 'text-gray-400');
+                videoTab.classList.remove('bg-gray-800', 'border-gray-700', 'text-white');
+                videoTab.classList.add('border-gray-600', 'text-gray-400');
+            });
+        });
+    </script>
+
     <!-- About Section -->
     <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-opacity-50 rounded-xl my-10" style="background-color: #050505;">
         <div class="text-center mb-16">
@@ -98,31 +140,33 @@
         </div>
         <div class="flex flex-col md:flex-row items-center justify-between">
             <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 flex justify-center">
-                <div class="bg-gray-800 p-1 rounded-full inline-block">
-                    <div class="bg-gray-700 rounded-full p-2">
+                <div class="bg-white p-1 rounded-full inline-block">
+                    <div class="bg-gray-400 rounded-full p-2">
                         <img src="Images/Logo.jpg" alt="Profile" class="rounded-full w-64 h-64 object-cover">
                     </div>
                 </div>
             </div>
             <div class="md:w-1/2 md:pl-10">
-                <h3 class="text-2xl font-semibold mb-4">Video Editor & Content Creator</h3>
-                <p class="text-gray-400 mb-6">
-                    I create videos on my YouTube looking to become big or at least get to 1000 subs. I mainly focus on funny moment videos that I record with my friends
-                </p>
-                <p class="text-gray-400 mb-6">
+                <h3 class="text-2xl text-center font-semibold mb-4">Video Editor & Content Creator</h3>
+                <div class="text-center mb-6">
+                    <p class="text-gray-400 mx-auto">
+                        I create videos on my YouTube looking to become big or at least get to 1000 subs. I mainly focus on funny moment videos that I record with my friends
+                    </p>
+                </div>
+                <p class="text-gray-400 text-center mb-6">
                     I am stepping into the realm of free lance editing and hoping to have it become a good side hustle. I am currently on Fiverr, and in random discord servers
                 </p>
-                <div class="flex space-x-4">
-                    <a href="https://www.youtube.com/channel/UC99Cz4NHGWHW-JzqPjVJr0g" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-youtube text-2xl"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@.cooldude82?is_from_webapp=1&sender_device=pc" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-tiktok text-2xl"></i>
-                    </a>
-                    <a href="https://discord.gg/9hTZzPCy7Z" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">
-                        <i class="fab fa-discord text-2xl"></i>
-                    </a>
-                </div>
+                    <div class="flex justify-center space-x-4">
+                        <a href="https://www.youtube.com/channel/UC99Cz4NHGWHW-JzqPjVJr0g" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-2xl"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@.cooldude82?is_from_webapp=1&sender_device=pc" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-tiktok text-2xl"></i>
+                        </a>
+                        <a href="https://discord.gg/9hTZzPCy7Z" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-discord text-2xl"></i>
+                        </a>
+                    </div>
             </div>
         </div>
     </section>
@@ -135,40 +179,40 @@
         </div>
         <div class="grid md:grid-cols-3 gap-8">
             <!-- Premiere Pro -->
-            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #050505;">
+            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #000000;">
             <div class="text-center mb-6">
                 <img src="Images/PremierePro.png" alt="Adobe Premiere Pro" class="mx-auto mb-4" style="width: 64px; height: 64px;">
-                <h3 class="text-xl font-semibold mb-2">Adobe Premiere Pro</h3>
+                <h3 class="text-xl font-semibold mb-2" style="background: linear-gradient(90deg, #390091 0%, #8e44ad 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Adobe Premiere Pro</h3>
             </div>
             <div class="mb-4">
             </div>
-            <p class="text-gray-400">
+            <p class="text-gray-400 text-center mb-6">
                 Premiere Pro is the program I triumph most in. I enjoy creating funny videos to make people laugh & have a great time. There are definately some things I need to work on, and there is 100% more I can do, BUT I like where my skill level is right now!
             </p>
             </div>
             
             <!-- Photoshop -->
-            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #050505;">
+            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #000000;">
                 <div class="text-center mb-6">
                     <img src="Images/Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop" class="mx-auto mb-4" style="width: 64px; height: 64px;">
-                    <h3 class="text-xl font-semibold mb-2">Adobe Photoshop</h3>
+                    <h3 class="text-xl font-semibold mb-2" style="background: linear-gradient(90deg, #001e36 0%, #31a8ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Adobe Photoshop</h3>
                 </div>
                 <div class="mb-4">
                 </div>
-                <p class="text-gray-400">
+                <p class="text-gray-400 text-center">
                     I create THUMBNAILS. I utilize Source Filmmaker first then throw it into Photoshop to make it look visually appealing
                 </p>
             </div>
             
             <!-- After Effects -->
-            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #050505;">
+            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #000000;">
                 <div class="text-center mb-6">
                     <img src="Images/AfterEffects.png" alt="Adobe AfterEffects" class="mx-auto mb-4" style="width: 64px; height: 64px;">
-                    <h3 class="text-xl font-semibold mb-2">Adobe After Effects</h3>
+                    <h3 class="text-xl font-semibold mb-2" style="background: linear-gradient(90deg, #27004e 0%, #9999ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">Adobe After Effects</h3>
                 </div>
                 <div class="mb-4">
                 </div>
-                <p class="text-gray-400">
+                <p class="text-gray-400 text-center">
                     I honestly haven't worked in After Effects AND if I did. It would be for creating montages.
                 </p>
             </div>
@@ -176,13 +220,37 @@
     </section>
 
     <!-- Videos Section -->
-    <section id="videos" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto rounded-xl my-10" style="background-color: #050505; background-opacity: 0.5;">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">My Videos</h2>
-            <div class="w-20 h-1 bg-gray-600 mx-auto"></div>
+    <section id="work" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto rounded-xl my-10" style="background-color: #050505; background-opacity: 0.5;">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">My Work</h2>
+            <div class="w-20 h-1 bg-gray-600 mx-auto mb-8"></div>
+            <div class="flex justify-center space-x-4 mb-12">
+                <button id="video-tab" class="px-6 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition duration-300 border border-gray-700 font-medium">
+                    Video Showcase
+                </button>
+                <button id="thumbnail-tab" class="px-6 py-2 border border-gray-600 text-gray-400 rounded-md hover:bg-gray-800 transition duration-300 font-medium">
+                    Thumbnail Gallery
+                </button>
+            </div>
+        </div>
+        <!-- Thumbnail Gallery Content (hidden by default) -->
+        <div id="thumbnail-content" class="hidden grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="overflow-hidden rounded-lg hover:scale-105 transition duration-300">
+                <img src="Thumbnails/SchizoVideo.jpg" alt="Thumbnail 1" class="w-full h-auto object-cover">
+            </div>
+            <div class="overflow-hidden rounded-lg hover:scale-105 transition duration-300">
+                <img src="Thumbnails/5stack.png" alt="Thumbnail 2" class="w-full h-auto object-cover">
+            </div>
+            <div class="overflow-hidden rounded-lg hover:scale-105 transition duration-300">
+                <img src="Thumbnails/chickfila.jpg" alt="Thumbnail 3" class="w-full h-auto object-cover">
+            </div>
+            <div class="overflow-hidden rounded-lg hover:scale-105 transition duration-300">
+                <img src="Thumbnails/Bronx.png" alt="Thumbnail 4" class="w-full h-auto object-cover">
+            </div>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Video Showcase Content -->
+        <div id="video-content" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Card 1 -->
             <!-- Most Recent Long-Form Video -->
             <div id="latest-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg cursor-pointer" style="background-color: #000000;" onclick="window.open(document.getElementById('latest-video-link').href, '_blank')">
@@ -190,7 +258,7 @@
                     <img id="latest-thumbnail" src="" alt="Latest Video" class="absolute h-full w-full object-cover">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
-                            <i class="fas fa-arrow-right text-2xl text-white"></i>
+                            <i class="fas fa-play text-2xl text-white"></i>
                         </div>
                     </div>
                 </div>
@@ -293,16 +361,16 @@
             <a href="Video/Fiverr Short Video.mp4" target="_blank" class="block">
                 <div id="latest-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg" style="background-color: #000000;">
                     <div class="relative pb-[56.25%]">
-                        <img src="Images/Fiverr.jpg" alt="FreeLance Editing" class="absolute h-full w-full object-cover">
+                        <img src="Images/Fiverr.jpg" alt="Free Lance Editing" class="absolute h-full w-full object-cover">
                         <div class="absolute inset-0 flex items-center justify-center">
                             <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
-                                <i class="fas fa-arrow-right text-2xl text-white"></i>
+                                <i class="fas fa-play text-2xl text-white"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">FreeLance Editing</h3>
-                        <p class="text-gray-400 mb-4">I create and edit gaming-focused video content, specializing in long-form videos with humorous highlights. After publishing, I repurpose standout moments into short-form clips to boost reach and engagement. My goal is to produce entertaining, well-edited content that resonates with viewers. </p>
+                        <h3 class="text-xl font-semibold mb-2">Free Lance Editing</h3>
+                        <p class="text-gray-400 text-center mb-4">I create and edit gaming-focused video content, specializing in long-form videos with humorous highlights. After publishing, I repurpose standout moments into short-form clips to boost reach and engagement. My goal is to produce entertaining, well-edited content that resonates with viewers. </p>
                         <div class="flex justify-between text-sm text-gray-500">
                         </div>
                     </div>
@@ -315,7 +383,7 @@
                 <img id="popular-thumbnail" src="" alt="Popular Video" class="absolute h-full w-full object-cover">
                 <div class="absolute inset-0 flex items-center justify-center">
                     <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
-                    <i class="fas fa-arrow-right text-2xl text-white"></i>
+                    <i class="fas fa-play text-2xl text-white"></i>
                     </div>
                 </div>
                 </div>
@@ -423,7 +491,7 @@
 
 
     <!-- Contact Section -->
-<!-- Contact Section -->
+    <!-- Contact Section -->
     <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Get In Touch</h2>
@@ -526,6 +594,59 @@
         if (skillsSection) {
             observer.observe(skillsSection);
         }
+    </script>
+
+    <script>
+        // Animated falling dots background effect
+        function createDots() {
+            const dotsContainer = document.createElement('div');
+            dotsContainer.style.position = 'fixed';
+            dotsContainer.style.top = '0';
+            dotsContainer.style.left = '0';
+            dotsContainer.style.width = '100%';
+            dotsContainer.style.height = '100%';
+            dotsContainer.style.pointerEvents = 'none';
+            dotsContainer.style.zIndex = '-1';
+            dotsContainer.style.overflow = 'hidden';
+            
+            // Create 300 dots spread across the screen
+            for (let i = 0; i < 300; i++) {
+                const dot = document.createElement('div');
+                dot.style.position = 'absolute';
+                dot.style.width = '2px';
+                dot.style.height = '2px';
+                dot.style.backgroundColor = 'rgba(255,255,255,0.3)';
+                dot.style.borderRadius = '50%';
+                
+                // Random horizontal position
+                dot.style.left = `${Math.random() * 100}%`;
+                
+                // Start above viewport
+                dot.style.top = `${-10 - Math.random() * 20}%`;
+                
+                // Random animation duration (5-15s)
+                const duration = 5 + Math.random() * 10;
+                dot.style.animation = `fall ${duration}s linear infinite`;
+                dot.style.animationDelay = `${Math.random() * 5}s`;
+                
+                dotsContainer.appendChild(dot);
+            }
+            
+            document.body.appendChild(dotsContainer);
+        }
+
+        // Add keyframes for falling animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                to {
+                    transform: translateY(110vh);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        createDots();
     </script>
 </body>
 </html>
