@@ -292,7 +292,6 @@
             </a>
 
             <!-- Most Popular Video Card -->
-            <!-- Most Popular Video Card -->
             <div id="popular-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg cursor-pointer" style="background-color: #000000;" onclick="window.open(document.getElementById('popular-video-link').href, '_blank')">
                 <div class="relative pb-[56.25%]">
                 <img id="popular-thumbnail" src="" alt="Popular Video" class="absolute h-full w-full object-cover">
@@ -303,17 +302,18 @@
                 </div>
                 </div>
                 <div class="p-6">
-                <h3 id="popular-title" class="text-xl font-semibold mb-2">Loading...</h3>
-                <p id="popular-description" class="text-gray-400 mb-4">Loading description...</p>
+                <h3 id="latest-title" class="text-xl font-semibold mb-2">Loading...</h3>
+                <p class="text-gray-400 mb-4">This is My Most Popular Video on My Channel At The Moment!</p>
                 <div class="flex justify-between text-sm text-gray-500">
-                    <span><i class="fas fa-eye mr-1"></i> <span id="popular-views">Loading...</span></span>
-                    <span><i class="far fa-calendar-alt mr-1"></i> <span id="popular-date">Loading...</span></span>
+                    <span><i class="fas fa-eye mr-1"></i> <span id="latest-views">Loading...</span></span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> <span id="latest-date">Loading...</span></span>
                 </div>
                 </div>
                 <a id="popular-video-link" href="#" target="_blank" class="hidden"></a>
             </div>
 
             <script>
+                
                 async function fetchMostPopularVideo() {
                     try {
                     // Step 1: Fetch channel uploads playlist ID
