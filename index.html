@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bzy | Editor Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .skill-bar {
+            transition: width 1.5s ease-in-out;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #9ca3af;
+            transition: width .3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body style="background-color: #0d0d0d;" class="text-gray-200 font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 border-b border-gray-800" style="background-color: rgba(38, 38, 38, 0.9);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold gradient-text">Only Fear God ✞</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium">About Me</a>
+                        <a href="#skills" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                        <a href="#videos" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Videos</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium">About Me</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#videos" class="block px-3 py-2 rounded-md text-base font-medium">Videos</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
+        <div class="text-center w-full">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 gradient-text">Brayden Carreon</h1>
+            <div class="flex justify-center space-x-6 mb-8">
+                <span class="text-xl md:text-2xl font-light text-gray-400">Perfection</span>
+                <span class="text-xl md:text-2xl font-light text-gray-400">|</span>
+                <span class="text-xl md:text-2xl font-light text-gray-400">Beazy</span>
+            </div>
+            <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10">
+                I’m a video editor who specializes in creating funny gaming moments with friends. I focus on fast-paced, engaging edits that highlight humor and personality in every clip.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#videos" class="px-6 py-3 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition duration-300">
+                    View My Work
+                </a>
+                <a href="#contact" class="px-6 py-3 border border-gray-600 text-white rounded-md hover:bg-gray-800 transition duration-300">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-opacity-50 rounded-xl my-10" style="background-color: #050505;">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">About Me</h2>
+            <div class="w-20 h-1 bg-gray-600 mx-auto"></div>
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 flex justify-center">
+                <div class="bg-gray-800 p-1 rounded-full inline-block">
+                    <div class="bg-gray-700 rounded-full p-2">
+                        <img src="Images/Logo.jpg" alt="Profile" class="rounded-full w-64 h-64 object-cover">
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 md:pl-10">
+                <h3 class="text-2xl font-semibold mb-4">Video Editor & Content Creator</h3>
+                <p class="text-gray-400 mb-6">
+                    I create videos on my YouTube looking to become big or at least get to 1000 subs. I mainly focus on funny moment videos that I record with my friends
+                </p>
+                <p class="text-gray-400 mb-6">
+                    I am stepping into the realm of free lance editing and hoping to have it become a good side hustle. I am currently on Fiverr, and in random discord servers
+                </p>
+                <div class="flex space-x-4">
+                    <a href="https://www.youtube.com/channel/UC99Cz4NHGWHW-JzqPjVJr0g" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-youtube text-2xl"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@.cooldude82?is_from_webapp=1&sender_device=pc" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-tiktok text-2xl"></i>
+                    </a>
+                    <a href="https://discord.gg/9hTZzPCy7Z" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">My Skills</h2>
+            <div class="w-20 h-1 bg-gray-600 mx-auto"></div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Premiere Pro -->
+            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #050505;">
+            <div class="text-center mb-6">
+                <img src="Images/PremierePro.png" alt="Adobe Premiere Pro" class="mx-auto mb-4" style="width: 64px; height: 64px;">
+                <h3 class="text-xl font-semibold mb-2">Adobe Premiere Pro</h3>
+            </div>
+            <div class="mb-4">
+            </div>
+            <p class="text-gray-400">
+                Premiere Pro is the program I triumph most in. I enjoy creating funny videos to make people laugh & have a great time. There are definately some things I need to work on, and there is 100% more I can do, BUT I like where my skill level is right now!
+            </p>
+            </div>
+            
+            <!-- Photoshop -->
+            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #050505;">
+                <div class="text-center mb-6">
+                    <img src="Images/Adobe_Photoshop_CC_icon.svg.png" alt="Adobe Photoshop" class="mx-auto mb-4" style="width: 64px; height: 64px;">
+                    <h3 class="text-xl font-semibold mb-2">Adobe Photoshop</h3>
+                </div>
+                <div class="mb-4">
+                </div>
+                <p class="text-gray-400">
+                    I create THUMBNAILS. I utilize Source Filmmaker first then throw it into Photoshop to make it look visually appealing
+                </p>
+            </div>
+            
+            <!-- After Effects -->
+            <div class="p-8 rounded-xl transition duration-300 hover:bg-[#333333]" style="background-color: #050505;">
+                <div class="text-center mb-6">
+                    <img src="Images/AfterEffects.png" alt="Adobe AfterEffects" class="mx-auto mb-4" style="width: 64px; height: 64px;">
+                    <h3 class="text-xl font-semibold mb-2">Adobe After Effects</h3>
+                </div>
+                <div class="mb-4">
+                </div>
+                <p class="text-gray-400">
+                    I honestly haven't worked in After Effects AND if I did. It would be for creating montages.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto rounded-xl my-10" style="background-color: #050505; background-opacity: 0.5;">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">My Videos</h2>
+            <div class="w-20 h-1 bg-gray-600 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <!-- Most Recent YouTube Video -->
+        <div id="latest-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg" style="background-color: #000000;">
+            <div class="relative pb-[56.25%]">
+                <img id="latest-thumbnail" class="absolute h-full w-full object-cover" src="" alt="Latest Video Thumbnail">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-2xl text-white"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6">
+                <h3 id="latest-title" class="text-xl font-semibold mb-2">Loading...</h3>
+                <p class="text-gray-400 mb-4">Most recent upload from my YouTube channel.</p>
+                <div class="flex justify-between text-sm text-gray-500">
+                    <span><i class="fas fa-eye mr-1"></i> <span id="latest-views">Loading...</span></span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> <span id="latest-date">Loading...</span></span>
+                </div>
+            </div>
+        </div>
+
+            <script>
+                const apiKey = 'AIzaSyAjDOq-BpeCzWarKn2PK6j_xSvEwmsw50Y';  // Replace with your YouTube Data API key
+                const channelId = 'UC99Cz4NHGWHW-JzqPjVJr0g';    // Replace with your YouTube Channel ID
+
+                async function fetchLatestVideo() {
+                    try {
+                        // Get uploads playlist ID
+                        const channelRes = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`);
+                        const channelData = await channelRes.json();
+                        const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+
+                        // Fetch up to 10 latest videos from uploads playlist
+                        const playlistRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=10&key=${apiKey}`);
+                        const playlistData = await playlistRes.json();
+
+                        for (const item of playlistData.items) {
+                            const videoId = item.snippet.resourceId.videoId;
+
+                            // Get video details including duration, stats and snippet
+                            const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics,snippet&id=${videoId}&key=${apiKey}`);
+                            const videoData = await videoRes.json();
+                            const video = videoData.items[0];
+
+                            // Parse ISO 8601 duration, e.g. PT5M20S
+                            const duration = video.contentDetails.duration;
+                            const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
+                            const minutes = match && match[1] ? parseInt(match[1]) : 0;
+                            const seconds = match && match[2] ? parseInt(match[2]) : 0;
+                            const totalSeconds = minutes * 60 + seconds;
+
+                            // Skip videos under 3 minutes (180 seconds)
+                            if (totalSeconds < 180) continue;
+
+                            // Populate the card with video info
+                            const snippet = video.snippet;
+                            const stats = video.statistics;
+
+                            document.getElementById('latest-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                            document.getElementById('latest-thumbnail').alt = snippet.title;
+                            document.getElementById('latest-title').innerText = snippet.title;
+                            document.getElementById('latest-views').innerText = new Intl.NumberFormat('en', { notation: 'compact' }).format(stats.viewCount) + ' views';
+
+                            const publishDate = new Date(snippet.publishedAt);
+                            const diffDays = Math.floor((new Date() - publishDate) / (1000 * 60 * 60 * 24));
+                            const relativeDate = diffDays < 1 ? 'Today' : (diffDays < 30 ? `${diffDays} days ago` : `${Math.floor(diffDays / 30)} months ago`);
+                            document.getElementById('latest-date').innerText = relativeDate;
+
+                            // Make entire card clickable to open YouTube video in new tab
+                            document.getElementById('latest-video').addEventListener('click', () => {
+                                window.open(`https://youtu.be/${videoId}`, '_blank');
+                            });
+
+                            break;  // Stop after first long-form video found
+                        }
+
+                    } catch (error) {
+                        console.error('Failed to fetch latest video:', error);
+                        document.getElementById('latest-title').innerText = 'Failed to load video';
+                        document.getElementById('latest-views').innerText = '-';
+                        document.getElementById('latest-date').innerText = '-';
+                    }
+                }
+
+                fetchLatestVideo();
+            </script>
+
+
+            <!-- Card 2 -->
+            <a href="Video/Fiverr Short Video.mp4" target="_blank" class="block">
+                <div id="latest-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg" style="background-color: #000000;">
+                    <div class="relative pb-[56.25%]">
+                        <img src="images/Fiverr.jpg" alt="FreeLance Editing" class="absolute h-full w-full object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
+                                <i class="fas fa-arrow-right text-2xl text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">FreeLance Editing</h3>
+                        <p class="text-gray-400 mb-4">I edit, preferably gaming videos, funny content I make my own long form content. Mainly containing video game content with funny moments/highlights. Once the full form videos are completed and upload, I then take a funny clip from the video to turn it into short form to HELP push the video out there and gain attraction. I would say I make somewhat decent content. I put effort into making them funny and laughable. </p>
+                        <div class="flex justify-between text-sm text-gray-500">
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Most Popular Video Card -->
+            <!-- Most Popular Video Card -->
+            <div id="popular-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg cursor-pointer" style="background-color: #000000;" onclick="window.open(document.getElementById('popular-video-link').href, '_blank')">
+                <div class="relative pb-[56.25%]">
+                <img id="popular-thumbnail" src="" alt="Popular Video" class="absolute h-full w-full object-cover">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
+                    <i class="fas fa-arrow-right text-2xl text-white"></i>
+                    </div>
+                </div>
+                </div>
+                <div class="p-6">
+                <h3 id="popular-title" class="text-xl font-semibold mb-2">Loading...</h3>
+                <p id="popular-description" class="text-gray-400 mb-4">Loading description...</p>
+                <div class="flex justify-between text-sm text-gray-500">
+                    <span><i class="fas fa-eye mr-1"></i> <span id="popular-views">Loading...</span></span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> <span id="popular-date">Loading...</span></span>
+                </div>
+                </div>
+                <a id="popular-video-link" href="#" target="_blank" class="hidden"></a>
+            </div>
+
+            <script>
+                async function fetchMostPopularVideo() {
+                    try {
+                    // Step 1: Fetch channel uploads playlist ID
+                    const channelRes = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`);
+                    const channelData = await channelRes.json();
+                    const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+
+                    // Step 2: Get up to 50 latest videos (to find popular long-form videos)
+                    const playlistRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=50&key=${apiKey}`);
+                    const playlistData = await playlistRes.json();
+
+                    let popularVideo = null;
+                    let maxViews = -1;
+
+                    // Step 3: Check each video's duration and views, find the most viewed video over 3 minutes
+                    for (const item of playlistData.items) {
+                        const videoId = item.snippet.resourceId.videoId;
+
+                        // Get video details
+                        const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics,snippet&id=${videoId}&key=${apiKey}`);
+                        const videoData = await videoRes.json();
+                        const video = videoData.items[0];
+
+                        // Parse duration (ISO 8601)
+                        const duration = video.contentDetails.duration;
+                        const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+                        const hours = match && match[1] ? parseInt(match[1]) : 0;
+                        const minutes = match && match[2] ? parseInt(match[2]) : 0;
+                        const seconds = match && match[3] ? parseInt(match[3]) : 0;
+                        const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+                        // Skip if shorter than 3 minutes (180 seconds)
+                        if (totalSeconds < 180) continue;
+
+                        // Check views
+                        const views = parseInt(video.statistics.viewCount);
+
+                        if (views > maxViews) {
+                        maxViews = views;
+                        popularVideo = video;
+                        }
+                    }
+
+                    if (!popularVideo) {
+                        document.getElementById('popular-title').innerText = 'No popular long-form video found';
+                        document.getElementById('popular-views').innerText = '-';
+                        document.getElementById('popular-date').innerText = '-';
+                        document.getElementById('popular-description').innerText = '';
+                        return;
+                    }
+
+                    // Populate card with popular video info
+                    const snippet = popularVideo.snippet;
+                    const stats = popularVideo.statistics;
+                    const videoId = popularVideo.id;
+
+                    document.getElementById('popular-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    document.getElementById('popular-thumbnail').alt = snippet.title;
+                    document.getElementById('popular-title').innerText = snippet.title;
+                    document.getElementById('popular-description').innerText = snippet.description.length > 100 ? snippet.description.substring(0, 100) + '...' : snippet.description;
+                    document.getElementById('popular-views').innerText = new Intl.NumberFormat('en', { notation: 'compact' }).format(stats.viewCount) + ' views';
+
+                    const publishDate = new Date(snippet.publishedAt);
+                    const diffDays = Math.floor((new Date() - publishDate) / (1000 * 60 * 60 * 24));
+                    const relativeDate = diffDays < 1 ? 'Today' : (diffDays < 30 ? `${diffDays} days ago` : `${Math.floor(diffDays / 30)} months ago`);
+                    document.getElementById('popular-date').innerText = relativeDate;
+
+                    // Update link href
+                    document.getElementById('popular-video-link').href = `https://youtu.be/${videoId}`;
+
+                    } catch (error) {
+                    console.error('Failed to fetch popular video:', error);
+                    document.getElementById('popular-title').innerText = 'Failed to load video';
+                    document.getElementById('popular-views').innerText = '-';
+                    document.getElementById('popular-date').innerText = '-';
+                    document.getElementById('popular-description').innerText = '';
+                    }
+                }
+
+                fetchMostPopularVideo();
+                </script>
+    </section>
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Get In Touch</h2>
+            <div class="w-20 h-1 bg-gray-600 mx-auto"></div>
+        </div>
+        <div class="max-w-3xl mx-auto rounded-xl p-8" style="background-color: #050505;">
+            <form>
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" style="background-color: #000000;">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" style="background-color: #000000;">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="subject" class="block text-sm font-medium text-gray-400 mb-2">Subject</label>
+                    <input type="text" id="subject" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" style="background-color: #000000;">
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                    <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500" style="background-color: #000000;"></textarea>
+                </div>
+                <button type="submit" class="w-full px-6 py-3 text-white rounded-md transition duration-300" style="background-color: #000000;" onmouseover="this.style.backgroundColor='#222222'" onmouseout="this.style.backgroundColor='#000000'">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: #000000; border-top: 1px solid #333333;" class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-xl font-bold gradient-text">PERFECTION</span>
+                    <p class="text-gray-500 mt-2">Soon To Be Top Notch Editor - TRUST</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white transition duration-300">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-white transition duration-300">
+                        <i class="fab fa-tiktok text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2007 Beazy. Loyalty Over Royalty.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Animate skill bars on scroll
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Intersection Observer for skill animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkills();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {threshold: 0.1});
+
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+    </script>
+</body>
+</html>
