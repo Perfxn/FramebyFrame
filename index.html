@@ -361,7 +361,6 @@
                         document.getElementById('popular-title').innerText = 'No popular long-form video found';
                         document.getElementById('popular-views').innerText = '-';
                         document.getElementById('popular-date').innerText = '-';
-                        document.getElementById('popular-description').innerText = '';
                         return;
                     }
 
@@ -373,7 +372,6 @@
                     document.getElementById('popular-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                     document.getElementById('popular-thumbnail').alt = snippet.title;
                     document.getElementById('popular-title').innerText = snippet.title;
-                    document.getElementById('popular-description').innerText = snippet.description.length > 100 ? snippet.description.substring(0, 100) + '...' : snippet.description;
                     document.getElementById('popular-views').innerText = new Intl.NumberFormat('en', { notation: 'compact' }).format(stats.viewCount) + ' views';
 
                     const publishDate = new Date(snippet.publishedAt);
@@ -389,7 +387,6 @@
                     document.getElementById('popular-title').innerText = 'Failed to load video';
                     document.getElementById('popular-views').innerText = '-';
                     document.getElementById('popular-date').innerText = '-';
-                    document.getElementById('popular-description').innerText = '';
                     }
                 }
 
