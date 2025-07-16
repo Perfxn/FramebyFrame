@@ -195,7 +195,12 @@
                 </div>
             </div>
             <div class="p-6">
-                <p class="text-gray-400 mb-4">Most Recent Upload from My YouTube channel.</p>
+                <h3 id="latest-title" class="text-xl font-semibold mb-2">Loading...</h3>
+                <p class="text-gray-400 mb-4">Most recent upload from my YouTube channel.</p>
+                <div class="flex justify-between text-sm text-gray-500">
+                    <span><i class="fas fa-eye mr-1"></i> <span id="latest-views">Loading...</span></span>
+                    <span><i class="far fa-calendar-alt mr-1"></i> <span id="latest-date">Loading...</span></span>
+                </div>
             </div>
         </div>
 
@@ -205,53 +210,50 @@
 
                 async function fetchLatestVideo() {
                     try {
-                        // Get uploads playlist ID
                         const channelRes = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`);
                         const channelData = await channelRes.json();
+
                         const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
 
-                        // Fetch up to 10 latest videos from uploads playlist
-                        const playlistRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=10&key=${apiKey}`);
+                        // Fetch ONLY the latest video
+                        const playlistRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${apiKey}`);
                         const playlistData = await playlistRes.json();
 
-                        for (const item of playlistData.items) {
-                            const videoId = item.snippet.resourceId.videoId;
+                        const item = playlistData.items[0];
+                        const videoId = item.snippet.resourceId.videoId;
 
-                            // Get video details including duration, stats and snippet
-                            const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics,snippet&id=${videoId}&key=${apiKey}`);
-                            const videoData = await videoRes.json();
-                            const video = videoData.items[0];
+                        // Fetch full details of that one video
+                        const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${apiKey}`);
+                        const videoData = await videoRes.json();
+                        const video = videoData.items[0];
 
-                            // Parse ISO 8601 duration, e.g. PT5M20S
-                            const duration = video.contentDetails.duration;
-                            const match = duration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
-                            const minutes = match && match[1] ? parseInt(match[1]) : 0;
-                            const seconds = match && match[2] ? parseInt(match[2]) : 0;
-                            const totalSeconds = minutes * 60 + seconds;
+                        // Update UI
+                        const snippet = video.snippet;
+                        const stats = video.statistics;
 
-                            // Skip videos under 3 minutes (180 seconds)
-                            if (totalSeconds < 180) continue;
+                        document.getElementById('latest-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                        document.getElementById('latest-thumbnail').alt = snippet.title;
+                        document.getElementById('latest-title').innerText = snippet.title;
+                        document.getElementById('latest-description').innerText = snippet.description;
+                        document.getElementById('latest-views').innerText = new Intl.NumberFormat('en', { notation: 'compact' }).format(stats.viewCount) + ' views';
 
-                            // Populate the card with video info
-                            const snippet = video.snippet;
-                            const stats = video.statistics;
+                        const publishDate = new Date(snippet.publishedAt);
+                        const diffDays = Math.floor((new Date() - publishDate) / (1000 * 60 * 60 * 24));
+                        const relativeDate = diffDays < 1 ? 'Today' : (diffDays < 30 ? `${diffDays} days ago` : `${Math.floor(diffDays / 30)} months ago`);
+                        document.getElementById('latest-date').innerText = relativeDate;
 
-                            document.getElementById('latest-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                            document.getElementById('latest-thumbnail').alt = snippet.title;
-
-                            // Make entire card clickable to open YouTube video in new tab
-                            document.getElementById('latest-video').addEventListener('click', () => {
-                                window.open(`https://youtu.be/${videoId}`, '_blank');
-                            });
-
-                            break;  // Stop after first long-form video found
-                        }
+                        document.getElementById('latest-video').onclick = () => {
+                            window.open(`https://youtu.be/${videoId}`, '_blank');
+                        };
 
                     } catch (error) {
                         console.error('Failed to fetch latest video:', error);
-                        // No error messages needed since we're not displaying text info
+                        document.getElementById('latest-title').innerText = 'Failed';
+                        document.getElementById('latest-views').innerText = '-';
+                        document.getElementById('latest-date').innerText = '-';
                     }
                 }
+
 
                 fetchLatestVideo();
             </script>
@@ -269,8 +271,8 @@
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Free Lance Editing</h3>
-                        <p class="text-gray-400 mb-4">I create and edit gaming-focused video content, specializing in long-form videos with humorous highlights. After publishing, I repurpose standout moments into short-form clips to boost reach and engagement. My goal is to produce entertaining, well-edited content that resonates with viewers.</p>
+                        <h3 class="text-xl font-semibold mb-2">FreeLance Editing</h3>
+                        <p class="text-gray-400 mb-4">I create and edit gaming-focused video content, specializing in long-form videos with humorous highlights. After publishing, I repurpose standout moments into short-form clips to boost reach and engagement. My goal is to produce entertaining, well-edited content that resonates with viewers. </p>
                         <div class="flex justify-between text-sm text-gray-500">
                         </div>
                     </div>
@@ -289,9 +291,10 @@
                 </div>
                 <div class="p-6">
                 <h3 id="popular-title" class="text-xl font-semibold mb-2">Loading...</h3>
-                <p class="text-gray-400 mb-4">Most Viewed YouTube Video on My Channel At The Moment.</p>
+                <p id="popular-description" class="text-gray-400 mb-4">Loading description...</p>
                 <div class="flex justify-between text-sm text-gray-500">
                     <span><i class="fas fa-eye mr-1"></i> <span id="popular-views">Loading...</span></span>
+                    <span class="text-gray-400">Most Popular</span>
                     <span><i class="far fa-calendar-alt mr-1"></i> <span id="popular-date">Loading...</span></span>
                 </div>
                 </div>
@@ -347,7 +350,6 @@
                         document.getElementById('popular-title').innerText = 'No popular long-form video found';
                         document.getElementById('popular-views').innerText = '-';
                         document.getElementById('popular-date').innerText = '-';
-                        document.getElementById('popular-description').innerText = '';
                         return;
                     }
 
@@ -359,6 +361,7 @@
                     document.getElementById('popular-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                     document.getElementById('popular-thumbnail').alt = snippet.title;
                     document.getElementById('popular-title').innerText = snippet.title;
+                    document.getElementById('popular-description').innerText = snippet.description;
                     document.getElementById('popular-views').innerText = new Intl.NumberFormat('en', { notation: 'compact' }).format(stats.viewCount) + ' views';
 
                     const publishDate = new Date(snippet.publishedAt);
@@ -374,6 +377,7 @@
                     document.getElementById('popular-title').innerText = 'Failed to load video';
                     document.getElementById('popular-views').innerText = '-';
                     document.getElementById('popular-date').innerText = '-';
+                    document.getElementById('popular-description').innerText = '';
                     }
                 }
 
