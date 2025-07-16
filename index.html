@@ -184,25 +184,27 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Card 1 -->
-            <!-- Most Recent YouTube Video -->
-        <div id="latest-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg" style="background-color: #000000;">
-            <div class="relative pb-[56.25%]">
-                <img id="latest-thumbnail" class="absolute h-full w-full object-cover" src="" alt="Latest Video Thumbnail">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
-                        <i class="fas fa-arrow-right text-2xl text-white"></i>
+            <!-- Most Recent Long-Form Video -->
+            <div id="latest-video" class="video-card rounded-xl overflow-hidden transition duration-300 hover:shadow-lg cursor-pointer" style="background-color: #000000;" onclick="window.open(document.getElementById('latest-video-link').href, '_blank')">
+                <div class="relative pb-[56.25%]">
+                    <img id="latest-thumbnail" src="" alt="Latest Video" class="absolute h-full w-full object-cover">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 bg-gray-900 bg-opacity-70 rounded-full flex items-center justify-center">
+                            <i class="fas fa-arrow-right text-2xl text-white"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="p-6">
-                <h3 id="latest-title" class="text-xl font-semibold mb-2">Loading...</h3>
-                <p class="text-gray-400 mb-4">Most recent upload from my YouTube channel.</p>
-                <div class="flex justify-between text-sm text-gray-500">
-                    <span><i class="fas fa-eye mr-1"></i> <span id="latest-views">Loading...</span></span>
-                    <span><i class="far fa-calendar-alt mr-1"></i> <span id="latest-date">Loading...</span></span>
+                <div class="p-6">
+                    <h3 id="latest-title" class="text-xl font-semibold mb-2">Loading...</h3>
+                    <p id="latest-description" class="text-gray-400 mb-4">Loading description...</p>
+                    <div class="flex justify-between text-sm text-gray-500">
+                        <span><i class="fas fa-eye mr-1"></i> <span id="latest-views">Loading...</span></span>
+                        <span class="text-gray-400">Latest Upload</span>
+                        <span><i class="far fa-calendar-alt mr-1"></i> <span id="latest-date">Loading...</span></span>
+                    </div>
                 </div>
+                <a id="latest-video-link" href="#" target="_blank" class="hidden"></a>
             </div>
-        </div>
 
             <script>
                 const apiKey = 'AIzaSyAjDOq-BpeCzWarKn2PK6j_xSvEwmsw50Y';  // Replace with your YouTube Data API key
@@ -212,29 +214,59 @@
                     try {
                         const channelRes = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=${apiKey}`);
                         const channelData = await channelRes.json();
-
                         const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
 
-                        // Fetch ONLY the latest video
-                        const playlistRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=1&key=${apiKey}`);
+                        // Get up to 20 latest videos to find the most recent long-form one
+                        const playlistRes = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=20&key=${apiKey}`);
                         const playlistData = await playlistRes.json();
 
-                        const item = playlistData.items[0];
-                        const videoId = item.snippet.resourceId.videoId;
+                        let latestVideo = null;
 
-                        // Fetch full details of that one video
-                        const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${apiKey}`);
-                        const videoData = await videoRes.json();
-                        const video = videoData.items[0];
+                        // Check each video's duration to find the most recent long-form one
+                        for (const item of playlistData.items) {
+                            const videoId = item.snippet.resourceId.videoId;
+                            const videoRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics,snippet&id=${videoId}&key=${apiKey}`);
+                            const videoData = await videoRes.json();
+                            const video = videoData.items[0];
+
+                            // Parse duration (ISO 8601)
+                            const duration = video.contentDetails.duration;
+                            const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+                            const hours = match && match[1] ? parseInt(match[1]) : 0;
+                            const minutes = match && match[2] ? parseInt(match[2]) : 0;
+                            const seconds = match && match[3] ? parseInt(match[3]) : 0;
+                            const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+                            // Only use if longer than 3 minutes (180 seconds)
+                            if (totalSeconds >= 180) {
+                                latestVideo = video;
+                                break; // Take the first (most recent) long-form video found
+                            }
+                        }
+
+                        if (!latestVideo) {
+                            document.getElementById('latest-title').innerText = 'No recent long-form videos';
+                            document.getElementById('latest-views').innerText = '-';
+                            document.getElementById('latest-date').innerText = '-';
+                            document.getElementById('latest-description').innerText = '';
+                            return;
+                        }
 
                         // Update UI
-                        const snippet = video.snippet;
-                        const stats = video.statistics;
+                        const snippet = latestVideo.snippet;
+                        const stats = latestVideo.statistics;
+                        const videoId = latestVideo.id;
 
                         document.getElementById('latest-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                         document.getElementById('latest-thumbnail').alt = snippet.title;
                         document.getElementById('latest-title').innerText = snippet.title;
-                        document.getElementById('latest-description').innerText = snippet.description;
+                        
+                        // Shorten description to first 100 characters
+                        const shortDescription = snippet.description.length > 100 
+                            ? snippet.description.substring(0, 100) + '...' 
+                            : snippet.description;
+                        document.getElementById('latest-description').innerText = shortDescription;
+                        
                         document.getElementById('latest-views').innerText = new Intl.NumberFormat('en', { notation: 'compact' }).format(stats.viewCount) + ' views';
 
                         const publishDate = new Date(snippet.publishedAt);
@@ -242,18 +274,16 @@
                         const relativeDate = diffDays < 1 ? 'Today' : (diffDays < 30 ? `${diffDays} days ago` : `${Math.floor(diffDays / 30)} months ago`);
                         document.getElementById('latest-date').innerText = relativeDate;
 
-                        document.getElementById('latest-video').onclick = () => {
-                            window.open(`https://youtu.be/${videoId}`, '_blank');
-                        };
+                        document.getElementById('latest-video-link').href = `https://youtu.be/${videoId}`;
 
                     } catch (error) {
                         console.error('Failed to fetch latest video:', error);
-                        document.getElementById('latest-title').innerText = 'Failed';
+                        document.getElementById('latest-title').innerText = 'Failed to load video';
                         document.getElementById('latest-views').innerText = '-';
                         document.getElementById('latest-date').innerText = '-';
+                        document.getElementById('latest-description').innerText = '';
                     }
                 }
-
 
                 fetchLatestVideo();
             </script>
@@ -361,7 +391,12 @@
                     document.getElementById('popular-thumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                     document.getElementById('popular-thumbnail').alt = snippet.title;
                     document.getElementById('popular-title').innerText = snippet.title;
-                    document.getElementById('popular-description').innerText = snippet.description;
+                    
+                    // Shorten description to first 100 characters
+                    const shortDescription = snippet.description.length > 100 
+                        ? snippet.description.substring(0, 100) + '...' 
+                        : snippet.description;
+                    document.getElementById('popular-description').innerText = shortDescription;
                     document.getElementById('popular-views').innerText = new Intl.NumberFormat('en', { notation: 'compact' }).format(stats.viewCount) + ' views';
 
                     const publishDate = new Date(snippet.publishedAt);
