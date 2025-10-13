@@ -303,6 +303,11 @@
             });
         });
         </script>
+        <script>
+        document.addEventListener('contextmenu', e => {
+          if(e.target.tagName === 'IMG') e.preventDefault();
+        });
+        </script>
 
 
         <!-- Video Showcase Content -->
@@ -706,5 +711,6 @@
     </script>
 </body>
 </html>
+
 
 
